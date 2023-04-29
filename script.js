@@ -20,9 +20,10 @@ function getWeather(cityName) {
       .then(function (data) {
         console.log(data)
         var htmlcard = document.getElementById('Five-day-Forecast');
+        htmlcard.innerHTML = ""
         for (let i =0; i< 0, i<data.list.length; i =i+8){
          
-          var cardEl = document.createElement('section')
+          var cardEl = document.createElement('article')
           cardEl.classList.add('card')
           var bodyEl = document.createElement('h6')
           bodyEl.textContent = "Temperature : "+ data.list[i].main.temp
@@ -49,4 +50,21 @@ document.getElementById('fetch-button').addEventListener('click',function(Event)
   Event.preventDefault()
   var city = document.getElementById('search-input').value
   getWeather(city)
+  var prevData = JSON.parse(localStorage.getItem('Weather-Dashboard')) || []
+  prevData.push(city)
+  localStorage.setItem('Weather-Dashboard', JSON.stringify(prevData))
+  displayLocalstorage()
 })
+ 
+function displayLocalstorage (){
+  var prevData = JSON.parse(localStorage.getItem('Weather-Dashboard')) || []
+  var asideEl = document.getElementById("Search-History")
+  asideEl.innerHTML = ""
+  for (let i =0; i<prevData.length; i++) {
+    var bodyEl = document.createElement('button')
+    bodyEl.textContent = prevData[i]
+    asideEl.append(bodyEl)
+  }
+}
+//  local storage. 
+displayLocalstorage()

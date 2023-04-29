@@ -17,6 +17,7 @@ body {
 
 main {
     display: block;
+    text-align: ;
 }
 
 h1 {
@@ -39,4 +40,9 @@ header {
     width: 30%;
     text-align: center;
     border: 5px solid black;
+  }
+  section{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
